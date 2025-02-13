@@ -3,7 +3,7 @@ import useFormHook from "../components/FormHook"
 
 
 function Register() {
-    const{datosForm,handleChange,handleChangeCheckbox,setDatosForm,error,setError,loading,setLoading,reset}=useFormHook({email:"",password:"",repeatPassword:"",accepNotifications:"",course:""})
+    const{datosForm,handleChange}=useFormHook({email:"",password:"",repeatPassword:"",accepNotifications:"",course:""})
 
     const handleSubmit=(e:FormEvent)=>{
             e.preventDefault()

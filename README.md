@@ -48,3 +48,26 @@ export default tseslint.config({
   },
 })
 ```
+
+# More dependencies
+```
+
+npm i react-router-dom
+
+npm install tailwindcss @tailwindcss/vite
+
+En vite config:
+  export default defineConfig({
+  plugins: [react(),tailwindcss()],
+})
+
+En index css:
+  @import "tailwindcss";
+
+
+npm install temporal-polyfill
+
+npm install react-hot-toast
+
+
+```

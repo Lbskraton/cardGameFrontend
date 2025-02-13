@@ -1,20 +1,17 @@
 import { ChangeEvent, useState } from 'react'
 
-interface Props{
-    [key:string]:string
-    
-}
 
-function useFormHook<T extends Props>(initialform:T) {
+
+function useFormHook<T >(initialform:T) {
 
    //Estados
    const [datosForm,setDatosForm]=useState(initialform)
-   const [error,setError]=useState('')
-   const [loading,setLoading]=useState(false)
+   const [formError,setFormError]=useState('')
+   const [formLoading,setFormLoading]=useState(false)
 
    //Control formulario
 
-   const handlechange=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>)=>{
+   const handleChange=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>)=>{
        
        const {value,name}=e.target
        setDatosForm((prevForm) => ({
@@ -24,9 +21,19 @@ function useFormHook<T extends Props>(initialform:T) {
        
      }
 
-     const reset=()=>{setDatosForm(initialform)}
+     const handleChangeCheckbox=(e:ChangeEvent<HTMLInputElement>)=>{
+       
+        const {checked,name}=e.target
+        setDatosForm((prevForm) => ({
+         ...prevForm,
+         [name]: checked
+       }));
+        
+      }
 
-     return { datosForm,handlechange,error,setError,loading,setLoading,reset}
+     const formReset=()=>{setDatosForm(initialform)}
+
+     return { datosForm,handleChange,handleChangeCheckbox,setDatosForm,formError,setFormError,formLoading,setFormLoading,formReset}
 }
 
 export default useFormHook

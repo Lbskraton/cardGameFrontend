@@ -8,7 +8,7 @@ function App() {
   //const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className='text-white bg-black'>
 
 
       <BrowserRouter>
@@ -24,7 +24,7 @@ function App() {
         </div>
       </BrowserRouter>
       
-    </>
+    </div>
   )
 }
 

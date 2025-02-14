@@ -1,16 +1,19 @@
 import { FormEvent, useState } from "react"
 import useFormHook from "../components/FormHook"
-import { loginUser } from "../services/auth.service"
+
+import { useAuth } from "../context/AuthContext"
 
 function Login() {
     const{datosForm,handleChange}=useFormHook({email:"algo",password:""})
     const [message,setMessage]=useState("")
 
+    const {login}=useAuth()
+
 
     const handleSubmit=async (e:FormEvent)=>{
         e.preventDefault()
         try {
-          await loginUser(datosForm.email,datosForm.password)
+          await login(datosForm.email,datosForm.password)
           setMessage("login succesful")
           //redirigir a otra pagina
         } catch (error) {

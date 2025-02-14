@@ -69,5 +69,7 @@ npm install temporal-polyfill
 
 npm install react-hot-toast
 
+npm i jwt-decode //No se puede usar por el http only
+
 
 ```

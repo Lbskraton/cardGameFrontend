@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react"
 import useFormHook from "../components/FormHook"
 
 import { useAuth } from "../context/AuthContext"
+import MessageCard from "../components/MessageCard"
 
 function Login() {
     const{datosForm,handleChange}=useFormHook({email:"algo",password:""})
@@ -44,7 +45,7 @@ function Login() {
   </div>
   <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 
-  {message ?<div className="text-black bg-white m-2.5 text-center rounded-lg grid grid-cols-3 content-between gap-4"><div>&#9670;</div><div>{message}</div><div>&#9670;</div></div> :<div></div>}
+  {message ?<MessageCard text={message}></MessageCard> :<div></div>}
 </form>
 
     </>

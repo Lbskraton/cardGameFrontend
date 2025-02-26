@@ -69,7 +69,7 @@ async function receiveList(){//Creo funcion por useEffect no puede async
                 {user.email}
               </td>
               <td className="px-6 py-4">
-                {user.role}
+                {user.rol}
               </td>
               <td className="px-6 py-4">
                 {user.course}

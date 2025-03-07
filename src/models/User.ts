@@ -5,5 +5,8 @@ export default interface User{
   email:string,
   course: string,
   active:boolean,
-  acceptNotifications:boolean
+  acceptNotifications:boolean,
+  password?:string
 }
+
+export const UserPropertieNames=["Name","Surname","Role","Email","Course","Active","AcceptNotifications","Password"]

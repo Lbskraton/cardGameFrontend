@@ -1,7 +1,7 @@
 export default interface User{
   name:string,
   surname:string,
-  rol:string,
+  role:string,
   email:string,
   course: string,
   active:boolean,

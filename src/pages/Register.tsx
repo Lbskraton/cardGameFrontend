@@ -1,9 +1,10 @@
 import { FormEvent } from "react"
 import useFormHook from "../components/FormHook"
+import InputForm from "../components/InputForm"
 
 
 function Register() {
-    const{datosForm,handleChange}=useFormHook({email:"",password:"",repeatPassword:"",accepNotifications:"",course:""})
+    const{datosForm,handleChange,formError}=useFormHook({email:"",password:"",repeatPassword:"",accepNotifications:"",course:""})
 
     const handleSubmit=(e:FormEvent)=>{
             e.preventDefault()
@@ -16,22 +17,18 @@ function Register() {
 
 
 <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
-  <div className="mb-5">
-    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-    <input type="email" id="email" className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" placeholder="name@flowbite.com" required name="email" value={datosForm.email} onChange={handleChange}/>
-  </div>
-  <div className="mb-5">
-    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-    <input type="password" id="password" className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" required name="password" value={datosForm.password} onChange={handleChange}/>
-  </div>
-  <div className="mb-5">
-    <label htmlFor="repeat-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
-    <input type="password" id="repeat-password" className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" required name="repeatPassword" value={datosForm.repeatPassword} onChange={handleChange}/>
-  </div>
-  <div className="mb-5">
-    <label htmlFor="repeat-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Accept Notifications</label>
-    <input type="password" id="repeat-password" className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" required name="repeatPassword" value={datosForm.accepNotifications} onChange={handleChange}/>
-  </div>
+  <br/>
+  
+  <InputForm name="name" text="name" handleChange={handleChange} error={formError}></InputForm>
+
+  <InputForm name="email" text="email" handleChange={handleChange} error={formError}></InputForm>
+  
+  <InputForm name="password" text="password" handleChange={handleChange} error={formError}></InputForm>
+  
+  <InputForm name="repeat-password" text="repeat-password" handleChange={handleChange} error={formError}></InputForm>
+  
+  <InputForm name="role" text="role" handleChange={handleChange} error={formError}></InputForm>
+  
   <div className="mb-5">
     <label htmlFor="repeat-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Curso</label>
     <input type="password" id="repeat-password" className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" required name="repeatPassword" value={datosForm.course} onChange={handleChange}/>

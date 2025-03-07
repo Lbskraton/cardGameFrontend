@@ -34,7 +34,8 @@ async function receiveList(){//Creo funcion por useEffect no puede async
   }
 
   return (
-    <>
+    <>  
+    <br/>
       <div className="relative overflow-x-auto">
         <span className="dark:text-white">{message}</span>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -50,7 +51,7 @@ async function receiveList(){//Creo funcion por useEffect no puede async
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
-                Rol
+                role
               </th>
               <th scope="col" className="px-6 py-3">
                 Curso
@@ -58,7 +59,7 @@ async function receiveList(){//Creo funcion por useEffect no puede async
             </tr>
           </thead>
           <tbody>
-            {users.map(user=><tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            {users.map(user=><tr key={user.email}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {user.name}
               </th>
@@ -69,7 +70,7 @@ async function receiveList(){//Creo funcion por useEffect no puede async
                 {user.email}
               </td>
               <td className="px-6 py-4">
-                {user.rol}
+                {user.role}
               </td>
               <td className="px-6 py-4">
                 {user.course}

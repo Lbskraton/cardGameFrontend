@@ -24,31 +24,31 @@ function Home() {
         <div>
           <span className="h-auto max-w-full rounded-lg" >&#127183;</span>
         </div>
-        <div>
-          <span className="h-auto max-w-full rounded-lg" >&#x1F0DB;</span>
+        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
+        <div className="leading-none -mt-3" >&#x1F0DB;</div>
         </div>
-        <div>
-          <span className="h-auto max-w-full rounded-lg" >&#x1F0A1;</span>
+        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
+        <div className="leading-none -mt-3"> &#x1F0A1;</div>
         </div>
         <div>
           <span className="h-auto max-w-full rounded-lg" >&#127183;</span>
         </div>
-        <div>
-          <span className="h-auto max-w-full rounded-lg" >&#x1F0A1;</span>
+        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
+          <div className="leading-none -mt-3" >&#x1F0A1;</div>
         </div>
-        <div>
-          <span className="h-auto max-w-full rounded-lg" >&#x1F0C1;</span>
+        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
+          <div className="leading-none -mt-3" >&#x1F0C1;</div>
         </div>
-        <div>
-          <span className="h-auto max-w-full rounded-lg" >&#x1F0A1;</span>
+        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
+          <div className="leading-none -mt-3" >&#x1F0A1;</div>
         </div>
-        <div>
-          <span className="h-auto max-w-full rounded-lg" >&#x1F0DE;</span>
+        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
+          <div className="leading-none -mt-3" >&#x1F0DE;</div>
         </div>
       </div>
 
 
-      <span className="dark:text-blue-700  text-5xl">&#x1F0A1;</span>
+      
 
 
 

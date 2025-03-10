@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext"
 import MessageCard from "../components/MessageCard"
 
 function Login() {
-    const{datosForm,handleChange}=useFormHook({email:"algo",password:""})
+    const{datosForm,handleChange}=useFormHook({email:"",password:""})
     const [message,setMessage]=useState("")
 
     const {login}=useAuth()

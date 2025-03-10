@@ -3,7 +3,6 @@ export default interface User{
   surname:string,
   role:string,
   email:string,
-  course: string,
   active:boolean,
   acceptNotifications:boolean,
   password?:string

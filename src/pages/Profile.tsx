@@ -42,7 +42,7 @@ function Profile() {
 
 
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <MessageCard type="joker" size="9xl">
+                        <MessageCard type="joker" size="text-9xl">
 
 
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

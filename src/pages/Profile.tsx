@@ -1,114 +1,110 @@
 
 
-import { UserPropertieNames } from "../models/User"
+import { useEffect, useState } from "react";
+import User from "../models/User"
+import { UserService } from "../services/userService";
+import MessageCard from "../components/MessageCard";
 
 function Profile() {
+
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        UserService.getProfile()
+            .then(setUser)
+            .catch((err) => {
+                setError(err instanceof Error ? err.message : "Error desconocido");
+            })
+            .finally(() => setLoading(false));
+    }, []);
 
 
 
 
     return (
 
-        <div>
-            <br />
+        <>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 m-4 text-center">
+            Perfil de Usuario
+        </h2>
+        { error && <p className="text-red-500">{error}</p> }
+        
+        
+        {loading ? (
+            <p>Cargando...</p>
+        ) : (
+            user && (
+
+                <div>
+                    <br />
 
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
-                        <tr>
-                            {UserPropertieNames}
-                            <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                                Product name
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Color
-                            </th>
-                            <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                                Category
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Price
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">
-                                Silver
-                            </td>
-                            <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                Laptop
-                            </td>
-                            <td className="px-6 py-4">
-                                $2999
-                            </td>
-                        </tr>
-                        <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Microsoft Surface Pro
-                            </th>
-                            <td className="px-6 py-4">
-                                White
-                            </td>
-                            <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                Laptop PC
-                            </td>
-                            <td className="px-6 py-4">
-                                $1999
-                            </td>
-                        </tr>
-                        <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Magic Mouse 2
-                            </th>
-                            <td className="px-6 py-4">
-                                Black
-                            </td>
-                            <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                Accessories
-                            </td>
-                            <td className="px-6 py-4">
-                                $99
-                            </td>
-                        </tr>
-                        <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Google Pixel Phone
-                            </th>
-                            <td className="px-6 py-4">
-                                Gray
-                            </td>
-                            <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                Phone
-                            </td>
-                            <td className="px-6 py-4">
-                                $799
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Apple Watch 5
-                            </th>
-                            <td className="px-6 py-4">
-                                Red
-                            </td>
-                            <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                Wearables
-                            </td>
-                            <td className="px-6 py-4">
-                                $999
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <MessageCard type="joker" size="9xl">
 
 
-        </div>
+                            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                <table className="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-gray-100">
+
+                                    <tbody>
+                                        <tr className="bg-gray-600 border-b border-gray-400">
+                                            <th scope="row" className="px-6 py-4 font-medium bg-gray-500 text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                Name
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {user?.name}
+                                            </td>
+
+                                        </tr>
+                                        <tr className="bg-gray-600 border-b border-gray-400">
+                                            <th scope="row" className="px-6 py-4 font-medium bg-gray-500 text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                Surname
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {user?.surname}
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-gray-600 border-b border-gray-400">
+                                            <th scope="row" className="px-6 py-4 font-medium bg-gray-500 text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                Role
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {user?.role}
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-gray-600 border-b border-gray-400">
+                                            <th scope="row" className="px-6 py-4 font-medium bg-gray-500 text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                Email
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {user?.email}
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-gray-600 border-gray-40">
+                                            <th scope="row" className="px-6 py-4 font-medium bg-gray-500 text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                Role
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {user?.role}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </MessageCard>
+
+                    </div>
+
+
+                </div>))}
+        
+        </>
+
+        
+    
     )
 }
 

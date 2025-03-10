@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 import User from "../models/User"
-import { getUsers } from "../services/userService"
+import { UserService } from "../services/userService"
 
 
 
@@ -13,7 +13,7 @@ function ListUsers() {
 
 async function receiveList(){//Creo funcion por useEffect no puede async
   try {
-    const usersList=await getUsers()
+    const usersList=await UserService.getUsers()
     setUsers(usersList)
   } catch (error) {
     const msg= error instanceof Error ? error.message : "Error desconocido"
@@ -72,9 +72,7 @@ async function receiveList(){//Creo funcion por useEffect no puede async
               <td className="px-6 py-4">
                 {user.role}
               </td>
-              <td className="px-6 py-4">
-                {user.course}
-              </td>
+              
             </tr>)}
             
             

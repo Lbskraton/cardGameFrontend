@@ -1,11 +1,13 @@
 
 
 interface MessageCardProps{
-    text:string,
-    type?:string
+    
+    type?:string,
+    size?:string,
+    children:React.ReactNode
 }
 
-function MessageCard({text,type}:MessageCardProps) {
+function MessageCard({type,size,children}:MessageCardProps) {
 
   const suites=new Map([["spades", "♠"],["hearts",  "♥"],["joker","🃏"]])
 
@@ -13,7 +15,7 @@ function MessageCard({text,type}:MessageCardProps) {
   const suite=suites.get(type || "spades") 
 
   return (
-    <div className="text-black bg-white m-2.5 text-center rounded-lg grid grid-cols-3 content-between gap-4"><div>{suite}</div><div>{text}</div><div>{suite}</div></div> 
+    <div className="p-4 text-black bg-white m-2.5 text-center rounded-lg grid grid-cols-3 content-between gap-4 items-center"><div  className={size ?"text-"+size :""}>{suite}</div><div>{children}</div><div className={size ?"text-"+size :""}>{suite}</div></div> 
   )
 }
 

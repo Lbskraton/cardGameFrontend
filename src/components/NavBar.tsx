@@ -5,8 +5,10 @@ import DroopDownMenuTry from "./DroopDownMenuTry"
 
 function NavBar() {
 
-  const { user,isAuthenticated, isAdmin, logout } = useAuth()
+  const { user, isAdmin, logout } = useAuth()
   return (
+
+    //<li>{isAuthenticated ? "auth" : "noauth"}{user?.email}</li>
 
 
     <nav className="bg-green-600 dark:bg-green-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
@@ -42,7 +44,7 @@ function NavBar() {
             {user?.email &&<Link to="/profile" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</Link>}
             </li>
 
-            <li>{isAuthenticated ? "auth" : "noauth"}{user?.email}</li>
+            
 
             {isAdmin && <li className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
               <Link to="/listUsers" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Usuarios</Link>

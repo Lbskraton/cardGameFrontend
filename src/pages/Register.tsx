@@ -7,21 +7,49 @@ import MessageCard from "../components/MessageCard"
 
 function Register() {
 
+  interface RegisterError{
+    name?:string,
+    surname?:string,
+    role?:string,
+    email?:string,
+    active?:boolean,
+    acceptNotifications?:boolean,
+    password?:string
+    repeatPassword?:string
+
+  }
+
   const { datosForm, handleChange, formError } = useFormHook({ name: "", email: "", password: "", repeatPassword: "", accepNotifications: true })
   const [message, setMessage] = useState("")
+  const [error,setError]=useState<RegisterError | undefined>()
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
+      setError({})
       const { repeatPassword, ...restobj } = datosForm
+      if(repeatPassword!==restobj.password){
+        setError({repeatPassword:"Contraseña distinta a la escrita arriba"})
+        throw new Error("Contraseña distinta a la escrita arriba")
+      }
+      if(!restobj.email){
+        setError(error=>({...error,email:"invalid void email"}))
+        throw new Error("Email invalido")
+      }
+      if(!restobj.name){
+        setError(error=>({...error,email:"invalid void name"}))
+        throw new Error("Nombre invalido")
+      }
       console.log(repeatPassword)
       console.log(restobj)
       await registerUser(restobj)
       setMessage("Resgister succesful")
+      setError({})
       //redirigir a otra pagina
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Error desconocido"
-      setMessage(msg)
+      const msg2= formError ?? ""
+      setMessage(msg+msg2)
 
     }
 
@@ -35,13 +63,13 @@ function Register() {
       <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
         <br />
 
-        <InputForm name="name" text="name" handleChange={handleChange} error={formError}></InputForm>
+        <InputForm name="name" text="name" handleChange={handleChange} error={error?.name}></InputForm>
 
-        <InputForm name="email" text="email" handleChange={handleChange} error={formError}></InputForm>
+        <InputForm name="email" text="email" handleChange={handleChange} error={error?.email}></InputForm>
 
-        <InputForm name="password" text="password" handleChange={handleChange} error={formError}></InputForm>
+        <InputForm name="password" text="password" handleChange={handleChange} error={error?.password}></InputForm>
 
-        <InputForm name="repeatPassword" text="repeatPassword" handleChange={handleChange} error={formError}></InputForm>
+        <InputForm name="repeatPassword" text="repeatPassword" handleChange={handleChange} error={error?.repeatPassword && formError}></InputForm>
 
 
 

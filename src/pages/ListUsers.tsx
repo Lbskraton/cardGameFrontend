@@ -51,11 +51,9 @@ async function receiveList(){//Creo funcion por useEffect no puede async
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
-                role
+                Role
               </th>
-              <th scope="col" className="px-6 py-3">
-                Curso
-              </th>
+              
             </tr>
           </thead>
           <tbody>

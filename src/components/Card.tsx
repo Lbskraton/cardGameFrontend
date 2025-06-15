@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ReactCardFlip from 'react-card-flip';
 
 const englishDeckEntities = {
   spades: {
@@ -74,12 +75,14 @@ interface CardProps{
     cardHeight?:number|null,
     frontImg?:string,
     backImg?:string,
-    turned?:boolean
+    turned:boolean,
+    onClickCard:() => void,
+    onHoverCard?:() =>void
 }
 
 
 
-function Card({entity,backEntity,frontImg,backImg,turned=false}:CardProps) {
+function Card({entity,cardHeight=500,cardWidth=300,backEntity,frontImg,backImg,turned=false,onClickCard=()=>{turned=!turned},onHoverCard=()=>{turned=!turned}}:CardProps) {
     //Por defecto esta bocaarriba
     
 
@@ -94,14 +97,47 @@ function Card({entity,backEntity,frontImg,backImg,turned=false}:CardProps) {
        
         return frontal
     }
+
+    const cardStyle = {
+    width: cardWidth ? `${cardWidth}px` : undefined,
+    height: cardHeight ? `${cardHeight}px` : undefined,
+    aspectRatio: '2 / 3', // Opcional, para mantener proporción si solo se pasa uno de los dos
+
+    };
+
+  // El emoji ocupa todo el espacio posible
+  const emojiStyle = {
+    fontSize: `${(cardHeight ? cardHeight :100) *0.8}px`,
+  
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    lineHeight: 1.05,
+    //Para problemas de los emojis con la fuente que me los descentra la seteo a mano
+    fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+    
+  };
     
 
   return (
-    <div>
-        <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
-          <div className="leading-none -mt-3" >{turned ? chooseImg('\u1F0A1',frontImg,entity) : chooseImg('\u1F0A0',frontImg,entity)}</div>
-        </div>
-    </div>
+    
+      <ReactCardFlip isFlipped={turned} >
+
+      <div key="front" className="rounded-lg bg-white border-6 border-black py-1 px-2" style={cardStyle}>
+        
+          <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span>
+        
+      </div>
+      <div key="back" className="rounded-lg bg-white border-6 border-black py-1 px-2" style={cardStyle}>
+        
+          <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',backImg,backEntity) }</span>
+    
+      </div>
+    </ReactCardFlip>
+
+    
+    
+    
   )
 }
 

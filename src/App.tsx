@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import ListUsers from './pages/ListUsers'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import Match from './pages/Match'
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/profile" element={<Profile/>}></Route>
+          <Route path="/match" element={<Match/>}></Route>
           
 
 

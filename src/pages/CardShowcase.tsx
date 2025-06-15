@@ -11,13 +11,10 @@ function CardShowcase() {
 
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 justify-items-center text-8xl">
-        <div className="h-full">
-          <Card deck={0} size={100} sizeUnit="%" suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)} ></Card>
-        </div>
         
-        
-        <Card deck={0} size={100} suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
-        <Card deck={0} size={100} suit={'heart'} value={'A'} entity={'🂡'} backEntity={'🃃'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
+        <Card  size={100} sizeUnit="%" suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)} ></Card>
+        <Card  size={100} suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
+        <Card  size={100} suit={'heart'} value={'A'} entity={'🂡'} backEntity={'🃃'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
         <div className="rounded-lg bg-white flex items-center justify-center h-full border-6 py-3 px-2 border-black">
           <div className="leading-none -mt-3" >&#x1F0CA;</div>
         </div>
@@ -47,7 +44,7 @@ function CardShowcase() {
         </div>
       </div>
 
-      <Card deck={0} size={100} suit={'heart'} value={'A'} entity={'🂡'} backEntity={'🃃'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
+      
 
 
       

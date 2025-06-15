@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
 import ReactCardFlip from 'react-card-flip';
 
 
 
 interface CardProps{
-    deck: number,
     suit:string,
     value:string,
     entity:string,

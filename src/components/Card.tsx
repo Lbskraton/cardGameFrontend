@@ -71,8 +71,6 @@ interface CardProps{
     entity:string,
     backEntity:string,
     lenght?:number,
-    cardWidth?:number|null,
-    cardHeight?:number|null,
     size?:number,
     frontImg?:string,
     backImg?:string,
@@ -105,17 +103,22 @@ function Card({entity,size=500,backEntity,frontImg,backImg,turned=false,onClickC
     width: cardWidth ? `${cardWidth}px` : undefined,
     height: cardHeight ? `${cardHeight}px` : undefined,
     aspectRatio: '2 / 3', // Opcional, para mantener proporción si solo se pasa uno de los dos
-
+      display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textalign: 'center',
     };
 
   // El emoji ocupa todo el espacio posible
   const emojiStyle = {
     fontSize: `${(cardHeight ? cardHeight :100) *0.8}px`,
   
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    lineHeight: 1.05,
+    display: 'block',
+     //textAlign: 'center',
+      width: '100%',
+      height: '100%',
+      
+    lineHeight: 1,
     //Para problemas de los emojis con la fuente que me los descentra la seteo a mano
     fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
     
@@ -123,16 +126,16 @@ function Card({entity,size=500,backEntity,frontImg,backImg,turned=false,onClickC
     
 
   return (
-    <div className='w-screen h-screen flex items-center '>
+    <div className=' flex items-center '>
 
       <ReactCardFlip isFlipped={turned} >
 
-      <div key="front" className="rounded-lg bg-white border-6 border-black " style={cardStyle}>
+      <div key="front" className="rounded-lg bg-white border-6 border-black text-center" style={cardStyle}>
         
           <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span>
         
       </div>
-      <div key="back" className="rounded-lg bg-white border-6 border-black " style={cardStyle}>
+      <div key="back" className="rounded-lg bg-white border-6 border-black  text-center" style={cardStyle}>
         
           <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',backImg,backEntity) }</span>
     

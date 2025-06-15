@@ -1,15 +1,16 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import useFormHook from "../components/FormHook"
 import InputForm from "../components/InputForm"
 import MessageCard from "../components/MessageCard"
-import { registerUser } from "../services/auth.service"
 
-import GameType from "../models/GameType"
 import { GameTypeService } from "../services/gameType.service"
-
-function GameTypeForm() {
-
-  
+import SelectFormMulti from "../components/SelectFormMulti"
+import { Deck } from "../models/Deck"
+import GameType from "../models/GameType"
+import { DeckService } from "../services/deck.service"
+import SelectFormSingle from "../components/SelectFormSingle"
+import unicodeOptions from "../utils/unicodeOptions"
+function DeckForm() {
 
   interface RegisterError{
     name?:string,
@@ -23,15 +24,50 @@ function GameTypeForm() {
 
   }
 
-  
+  const myDeck:Deck={name: ""}
+  const myGameTypes:GameType[]=[]
 
-  const myGameType:GameType={name: ""}
-  
-
-  const { datosForm, handleChange, formError } = useFormHook(myGameType)
-
+  const { datosForm, handleChange,handleChangeSelected, formError } = useFormHook(myDeck)
   const [message, setMessage] = useState("")
   const [error,setError]=useState<RegisterError | undefined>()
+  const [gameTypes, setGameTypes] = useState(myGameTypes);
+  
+
+  const getGameTypes=async ()=>{
+    try {
+      setError({})
+      
+
+      const res=await GameTypeService.getGameTypes()
+      console.log('Gametype res: '+res)
+      setGameTypes(res) 
+      
+      console.log(gameTypes)
+    
+      setMessage("GameType safully retrieved")
+      setError({})
+      //redirigir a otra pagina
+      
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : "Error desconocido al obtner los gametypes"
+      const msg2= formError ?? ""
+      setMessage(msg+msg2)
+
+    }
+    
+  }
+
+  useEffect(() => {
+  
+    const fetchGameTypes = async () => {
+      //Cargo los gametypes nada más empezar
+        getGameTypes()
+    
+    };
+  
+  fetchGameTypes();
+  console.log(gameTypes)
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -43,17 +79,17 @@ function GameTypeForm() {
         throw new Error("Nombre invalido")
       }
       
-      const res=await  GameTypeService.saveGameType(datosForm)
-      console.log(res.status)
-    
-      setMessage("GameType save succesful")
-      setError({})
+      const res=await  DeckService.saveDeck(datosForm)
+
       //redirigir a otra pagina
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Error desconocido"
       const msg2= formError ?? ""
       setMessage(msg+msg2)
 
+    }finally{
+        setMessage("GameType save succesful")
+      setError({})
     }
 
   }
@@ -68,15 +104,19 @@ function GameTypeForm() {
 
         <InputForm name="name" text="name" handleChange={handleChange} error={error?.name}></InputForm>
 
-        <InputForm name="time" text="Tiempo Maximo (Segundos) (Opcional)" type="number" handleChange={handleChange} error={error?.email}></InputForm>
+        <SelectFormMulti 
+        name={"gameTypes"} 
+        text={"Tipos de Juegos que usan este deck"} 
+        value={datosForm.gameTypeIds?.map(id => id.toString()) ?? []}
+        options={gameTypes.map(v=>({ value: ""+v.id, label: v.name }))} 
+        handleChange={handleChangeSelected}></SelectFormMulti>
 
-        <InputForm name="minRounds" text="Minimo de Rondas (Opcional)" type="number" handleChange={handleChange} error={error?.email}></InputForm>
-
-        <InputForm name="maxRounds" text="Máximo de Rondas (Opcional)" type="number" handleChange={handleChange} error={error?.email}></InputForm>
-
-        <InputForm name="minUsers" text="Minimo de Usuarios (Opcional)" type="number" handleChange={handleChange} error={error?.email}></InputForm>
-
-        <InputForm name="maxUsers" text="Máximo de Usuarios (Opcional)" type="number" handleChange={handleChange} error={error?.email}></InputForm>
+        <SelectFormSingle 
+        name={"entity"} 
+        text={"Aspecto del reverso del deck"} 
+        value={datosForm.entity+""}
+        options={unicodeOptions} 
+        handleChange={handleChange}></SelectFormSingle>
 
 
         <div className="flex items-start mb-5">
@@ -95,4 +135,4 @@ function GameTypeForm() {
   )
 }
 
-export default GameTypeForm
+export default DeckForm

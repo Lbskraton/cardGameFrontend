@@ -13,10 +13,10 @@ function useFormHook<T >(initialform:T) {
 
    const handleChange=(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>)=>{
        
-       const {value,name}=e.target
+       const {value,name,type}=e.target
        setDatosForm((prevForm) => ({
         ...prevForm,
-        [name]: value
+        [name]: type === "number" ? (value === "" ? undefined : Number(value)) : value
       }));
        
      }
@@ -31,9 +31,15 @@ function useFormHook<T >(initialform:T) {
         
       }
 
+      //En pruebas
+      const handleChangeSelected=(e:ChangeEvent<HTMLSelectElement>)=>{
+         const selected = Array.from(e.target.selectedOptions, option => Number(option.value));
+        setDatosForm({ ...datosForm, gameTypeIds: selected });
+      }
+
      const formReset=()=>{setDatosForm(initialform)}
 
-     return { datosForm,handleChange,handleChangeCheckbox,setDatosForm,formError,setFormError,formLoading,setFormLoading,formReset}
+     return { datosForm,handleChange,handleChangeCheckbox,handleChangeSelected,setDatosForm,formError,setFormError,formLoading,setFormLoading,formReset}
 }
 
 export default useFormHook

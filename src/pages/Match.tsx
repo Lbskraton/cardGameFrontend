@@ -8,8 +8,11 @@ function Match() {
 
   return (
     <div>
-      <div className='w-screen h-screen flex items-center justify-center'><Card deck={0} suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card></div>
-      <div className='w-50px h-50px flex items-center justify-center'><Card cardWidth={100} cardHeight={200} deck={0} suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card></div>
+      <Card deck={0} size={100} suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
+      <Card deck={0} size={500} suit={'heart'} value={'A'} entity={'\u{1F0A1}'} backEntity={'\u{1F0A0}'} turned={isFlipped} onClickCard={()=>setIsFlipped(f => !f)}></Card>
+      
+      
+      
     </div>
     
   )

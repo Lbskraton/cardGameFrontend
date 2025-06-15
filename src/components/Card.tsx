@@ -73,6 +73,7 @@ interface CardProps{
     lenght?:number,
     cardWidth?:number|null,
     cardHeight?:number|null,
+    size?:number,
     frontImg?:string,
     backImg?:string,
     turned:boolean,
@@ -82,9 +83,11 @@ interface CardProps{
 
 
 
-function Card({entity,cardHeight=500,cardWidth=300,backEntity,frontImg,backImg,turned=false,onClickCard=()=>{turned=!turned},onHoverCard=()=>{turned=!turned}}:CardProps) {
+function Card({entity,size=500,backEntity,frontImg,backImg,turned=false,onClickCard=()=>{turned=!turned},onHoverCard=()=>{turned=!turned}}:CardProps) {
     //Por defecto esta bocaarriba
     
+    const cardHeight=size
+    const cardWidth=size*(2/3.0)
 
     const chooseImg=(vdefault:string,frontImg?:string,entity?:string)=>{
         let frontal=vdefault
@@ -120,20 +123,24 @@ function Card({entity,cardHeight=500,cardWidth=300,backEntity,frontImg,backImg,t
     
 
   return (
-    
+    <div className='w-screen h-screen flex items-center '>
+
       <ReactCardFlip isFlipped={turned} >
 
-      <div key="front" className="rounded-lg bg-white border-6 border-black py-1 px-2" style={cardStyle}>
+      <div key="front" className="rounded-lg bg-white border-6 border-black " style={cardStyle}>
         
           <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span>
         
       </div>
-      <div key="back" className="rounded-lg bg-white border-6 border-black py-1 px-2" style={cardStyle}>
+      <div key="back" className="rounded-lg bg-white border-6 border-black " style={cardStyle}>
         
           <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',backImg,backEntity) }</span>
     
       </div>
     </ReactCardFlip>
+    </div>
+    
+      
 
     
     

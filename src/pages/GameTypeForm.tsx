@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react"
 import useFormHook from "../components/FormHook"
 import InputForm from "../components/InputForm"
 import MessageCard from "../components/MessageCard"
-import { registerUser } from "../services/auth.service"
+
 
 import GameType from "../models/GameType"
 import { GameTypeService } from "../services/gameType.service"
@@ -48,7 +48,7 @@ function GameTypeForm() {
     
       setMessage("GameType save succesful")
       setError({})
-      //redirigir a otra pagina
+      
     } catch (error) {
       const msg = error instanceof Error ? error.message : "Error desconocido"
       const msg2= formError ?? ""

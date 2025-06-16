@@ -6,9 +6,9 @@ const API_URL_BASE = import.meta.env.VITE_API_URL_BASE + '/score';
 export class ScoreService {
 
   
-  static async createScore(score: Partial<Score>) {
+  static async createScore(idRound:number,score: Partial<Score>) {
     try {
-      const response = await fetchAPI(API_URL_BASE+'/', {
+      const response = await fetchAPI(API_URL_BASE+'/'+idRound, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -51,9 +51,9 @@ export class ScoreService {
   }*/
 
  
-  static async updateScore(score: Partial<Score>) {
+  static async updateScore(idRound: number,score: Partial<Score>) {
     try {
-      const response = await fetchAPI(`${API_URL_BASE}/`, {
+      const response = await fetchAPI(API_URL_BASE+'/'+idRound, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -74,9 +74,9 @@ export class ScoreService {
   }
 
   
-  static async deleteScore(idRound: number, idGameParticipant: number) {
+  static async delete(idRound: number, idGameParticipant: number) {
     try {
-      const response = await fetchAPI(`${API_URL_BASE}/`, {
+      const response = await fetchAPI(API_URL_BASE+'/'+idRound, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

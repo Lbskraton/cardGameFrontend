@@ -4,8 +4,8 @@ import Round from "./Round";
 import User from "./User";
 
 export interface Game {
-  id: number;
-  idGameTypeid: number;
+  id?: number;
+  idGameTypeid?: number;
   idUserCreator?: number;
 
   // Relaciones

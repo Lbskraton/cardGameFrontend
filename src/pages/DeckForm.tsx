@@ -10,17 +10,19 @@ import GameType from "../models/GameType"
 import { DeckService } from "../services/deck.service"
 import SelectFormSingle from "../components/SelectFormSingle"
 import unicodeOptions from "../utils/unicodeOptions"
+import User from "../models/User"
+import modelCard from "../models/Card"
 function DeckForm() {
 
-  interface RegisterError{
-    name?:string,
-    surname?:string,
-    role?:string,
-    email?:string,
-    active?:boolean,
-    acceptNotifications?:boolean,
-    password?:string
-    repeatPassword?:string
+  interface DeckError{
+      id?: number;
+      name?: string;
+      entity?:string;
+      idUserCreator?: number | null;
+      userCreator?: User | null;
+      gameTypes?: GameType[];
+      gameTypeIds?: number[];
+      Cards?: modelCard[];
 
   }
 
@@ -29,7 +31,7 @@ function DeckForm() {
 
   const { datosForm, handleChange,handleChangeSelected, formError } = useFormHook(myDeck)
   const [message, setMessage] = useState("")
-  const [error,setError]=useState<RegisterError | undefined>()
+  const [error,setError]=useState<DeckError | undefined>()
   const [gameTypes, setGameTypes] = useState(myGameTypes);
   
 
@@ -79,7 +81,7 @@ function DeckForm() {
         throw new Error("Nombre invalido")
       }
       
-      const res=await  DeckService.saveDeck(datosForm)
+      await  DeckService.saveDeck(datosForm)
 
       //redirigir a otra pagina
     } catch (error) {

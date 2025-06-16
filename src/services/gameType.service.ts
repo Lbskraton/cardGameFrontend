@@ -35,6 +35,22 @@ export class GameTypeService{
         
     }
 
+
+    static async getGameTypeById(id:number) {
+    const response = await fetch(API_URL_BASE+'/'+id, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // Puedes añadir aquí el token si es necesario
+        },
+        credentials: "include" // para enviar cookies si es necesario
+    });
+
+    return await response.json();
+}
+
+
+
     
 
 }

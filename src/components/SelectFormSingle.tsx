@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface SelectFormMultiProps {
   name: string;
@@ -16,8 +16,24 @@ const SelectFormSingle: React.FC<SelectFormMultiProps> = ({
   options,
   handleChange,
   error,
-}) => (
-  <div className="mb-4">
+}) => {
+
+
+  //Si no cuando solo hay una opcion disponible me salta un fallo, ya que no cambia no la selecciona
+  useEffect(() => {
+    if (options.length === 1 && value === "") {
+      // Simula un evento de cambio para el padre
+      handleChange({
+        target: {
+          name,
+          value: options[0].value,
+        }
+      } as React.ChangeEvent<HTMLSelectElement>);
+    }
+  }, [options]);
+
+  return (
+    <div className="mb-4">
     <label className="block mb-1 font-bold" htmlFor={name}>
       {text}
     </label>
@@ -36,7 +52,9 @@ const SelectFormSingle: React.FC<SelectFormMultiProps> = ({
       ))}
     </select>
     {error && <span className="text-red-500 text-xs">{error}</span>}
-  </div>
-);
+  </div>)};
+
+
+
 
 export default SelectFormSingle;

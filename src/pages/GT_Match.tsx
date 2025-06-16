@@ -81,12 +81,16 @@ function GT_Match({gameType,idDeckStr}:GT_Match_Props) {
 
   const getDecks=async ()=>{
       try {
-        
+        console.log(idDeckStr+" y en number "+Number(idDeckStr))
         const idDeck=idDeckStr ? Number(idDeckStr) : undefined;
         if(!idDeck ){
             throw new Error("Deck no encontrado")
         }
         const res=await DeckService.getDeckCards(idDeck)
+
+        if(res.Cards.lenght<Math.floor(ncards/2)){
+            throw new Error("No hay suficientes cartas en el Deck")
+        }
     
         //Extrae cartas aletorias
         const extraeCartas = [...res.Cards].sort(() => Math.random() - 0.5).slice(0, Math.floor(ncards/2))

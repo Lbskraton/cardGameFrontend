@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DroopDownMenuTry from "./DroopDownMenuTry"
+import Card from "./Card"
+import DroopDownMenuDiv from "./DropDownMenuDiv"
 
 
 function NavBar() {
@@ -13,10 +15,19 @@ function NavBar() {
 
     <nav className="bg-green-600 dark:bg-green-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="dark:text-blue-700 bg-white-400 text-5xl">&#x1F0A1;</span>
+        <DroopDownMenuDiv  items={[{ title: "Home", url: "/" }, { title: "Deck-Form", url: "/deckform" }, { title: "Card-Form", url: "/cardform" }, { title: "Game-Type-Form", url: "/gtform" }, { title: "Game-Type-List", url: "/gtlist" }]}>
+
+          <div className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Card suit={"Heart"} value={"A"} entity={"🃴"} backEntity={"🂠"} turned={false} onClickCard={function (): void {
+            throw new Error("Function not implemented.")
+          } } size={50} sizeUnit="px"></Card>
+          
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CardWorld</span>
-        </Link>
+        </div>
+        </DroopDownMenuDiv>
+        
+
+
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <div className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             {user?.email ? <DroopDownMenuTry buttonLabel={user?.email} items={[{ title: "profilr", url: "/profile" }, { title: "logout", action: logout }]} ></DroopDownMenuTry> : "Get started"}

@@ -104,14 +104,14 @@ function Card({entity,size=500,sizeUnit='px',backEntity,frontImg,backImg,turned=
 
       <ReactCardFlip isFlipped={turned} >
 
-      <div key="front" className="rounded-lg  items-center text-center justify-center" style={!isBadEmoji ?cardStyle :badEmojiCardStyle}>
+      <div key="front" className="rounded-lg  items-center text-center justify-center " style={!isBadEmoji ?cardStyle :badEmojiCardStyle}>
         
-          {isBadEmoji ? <span style={badEmojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span> :<span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span>}
+          {isBadEmoji ? <span className='-mt-1.5' style={badEmojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span> :<span className='-mt-1.5' style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',frontImg,entity) }</span>}
         
       </div>
-      <div key="back" className="rounded-lg  items-center text-center justify-center" style={cardStyle}>
+      <div key="back" className="rounded-lg  items-center text-center justify-center " style={cardStyle}>
         
-          <span style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',backImg,backEntity) }</span>
+          <span className='-mt-1.5' style={emojiStyle} onClick={onClickCard} >{chooseImg('\u1F0A1',backImg,backEntity) }</span>
     
       </div>
     </ReactCardFlip>

@@ -97,7 +97,8 @@ function Play() {
         e.preventDefault()
         try {
           setError({})
-    
+            
+          console.log(datosForm.idDeck+" "+datosForm.idGameType)
           //redirigir a otra pagina
 
           navigate(`/match?idDeck=${datosForm.idDeck}&idGameType=${datosForm.idGameType}`);
@@ -127,7 +128,7 @@ function Play() {
         <SelectFormSingle 
         name={"idGameType"} 
         text={"Estilo de juego a jugar"} 
-        value={datosForm.idGameType+""}
+        value={datosForm.idGameType}
         options={gameTypes.map((d)=>({ value: ""+d.id, label: d.name }))} 
         handleChange={handleChange}
         error={error?.gameTypeId}></SelectFormSingle>
@@ -135,7 +136,7 @@ function Play() {
         <SelectFormSingle 
         name={"idDeck"} 
         text={"Baraja a Usar"} 
-        value={datosForm.idDeck+""}
+        value={datosForm.idDeck}
         options={decks.map((d)=>({ value: ""+d.id, label: d.name }))} 
         handleChange={handleChange}
         error={error?.deckId}></SelectFormSingle>

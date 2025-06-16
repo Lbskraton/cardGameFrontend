@@ -5,7 +5,7 @@ import Card from "../components/Card";
 function Home() {
   // Lista de cartas de muestra
   const cards = [
-    { entity: '🂡', suit: 'spades', value: 'A', deck: 1 },
+    { entity: '🃴', suit: 'spades', value: 'A', deck: 1 },
     { entity: '🂽', suit: 'hearts', value: 'Q', deck: 1 },
     { entity: '🃍', suit: 'diamonds', value: 'Q', deck: 1 },
     { entity: '🃊', suit: 'diamonds', value: '10', deck: 1 },

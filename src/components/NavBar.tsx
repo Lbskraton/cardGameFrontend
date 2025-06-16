@@ -15,7 +15,7 @@ function NavBar() {
 
     <nav className="bg-green-600 dark:bg-green-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <DroopDownMenuDiv  items={[{ title: "Home", url: "/" }, { title: "Deck-Form", url: "/deckform" }, { title: "Card-Form", url: "/cardform" }, { title: "Game-Type-Form", url: "/gtform" }, { title: "Game-Type-List", url: "/gtlist" }]}>
+        <DroopDownMenuDiv  items={[{ title: "Home", url: "/" }, { title: "Deck-Form", url: "/deckform" }, { title: "Card-Form", url: "/cardform" }, { title: "Game-Type-Form", url: "/gtform" }, { title: "Game-Type-List", url: "/gtlist" }, { title: "Game-List", url: "/glist" }]}>
 
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
           <Card suit={"Heart"} value={"A"} entity={"🃴"} backEntity={"🂠"} turned={false} onClickCard={function (): void {

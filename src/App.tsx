@@ -13,6 +13,8 @@ import GameTypeList from './pages/ListGameTypes'
 import DeckForm from './pages/DeckForm'
 import Play from './pages/Play'
 import CardForm from './pages/CardForm'
+import ListScores from './pages/ListScores'
+import GameList from './pages/ListGame'
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -39,6 +41,8 @@ function App() {
           <Route path="/play" element={<Play/>}></Route>
           <Route path="/match" element={<Match/>}></Route>
           <Route path="/cardform" element={<CardForm/>}></Route>
+          <Route path="/scoreslist" element={<ListScores/>}></Route>
+          <Route path="/glist" element={<GameList/>}></Route>
 
           
 

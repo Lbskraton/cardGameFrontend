@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react"
 
-
-import { GameTypeService } from "../services/gameType.service"
-import GameType from "../models/GameType"
 import { useNavigate } from "react-router-dom"
+import { GameService } from "../services/game.service"
+import { Game } from "../models/Game"
 import MessageCard from "../components/MessageCard"
 
 
 
-function GameTypeList() {
+function GameList() {
 
   const [message,setMessage]=useState('')
   const [loading,setLoading]=useState(true)
-  const [gameTypes,setGameTypes]=useState<GameType[]>([])
+  const [games,setGames]=useState<Game[]>([])
 
   //Para navegar a los scores
   const navigate = useNavigate();
 
 async function receiveList(){//Creo funcion por useEffect no puede async
   try {
-    const GamTypesList=await GameTypeService.getGameTypes()
+    const GamesList=await GameService.getGames()
     
-    setGameTypes(GamTypesList)
+    setGames(GamesList)
   } catch (error) {
     const msg= error instanceof Error ? error.message : "Error desconocido"
       setMessage(msg)
@@ -49,20 +48,18 @@ async function receiveList(){//Creo funcion por useEffect no puede async
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3 ">
-                Name
+                Id juego
               </th>
               <th scope="col" className="px-6 py-3">
-                Min Rounds
+                Id tipo Juego
               </th>
               <th scope="col" className="px-6 py-3">
-                Max Rounds
+                Id Creador
               </th>
               <th scope="col" className="px-6 py-3">
-                Min Users
+                Numero de Rondas
               </th>
-              <th scope="col" className="px-6 py-3">
-                Max Users
-              </th>
+              
               <th scope="col" className="px-6 py-3">
                 Scores
               </th>
@@ -70,24 +67,22 @@ async function receiveList(){//Creo funcion por useEffect no puede async
             </tr>
           </thead>
           <tbody>
-            {gameTypes.map(gameType=><tr key={gameType.name}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            {games.map(game=><tr key={game.id}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {gameType.time}
+                {game.id}
               </th>
               <td className="px-6 py-4">
-                {gameType.minRounds}
+                {game.idGameType}
               </td>
               <td className="px-6 py-4">
-                {gameType.maxRounds}
+                {game.idUserCreator}
               </td>
               <td className="px-6 py-4">
-                {gameType.minUsers}
+                {game.rounds?.length}
               </td>
+              
               <td className="px-6 py-4">
-                {gameType.maxUsers}
-              </td>
-              <td className="px-6 py-4">
-                <button onClick={() => navigate(`/scores/${gameType.id}`)}>Scores</button>
+                <button onClick={() => navigate(`/scores/${game.id}`)}>Scores</button>
               </td>
               
             </tr>)}
@@ -101,4 +96,4 @@ async function receiveList(){//Creo funcion por useEffect no puede async
   )
 }
 
-export default GameTypeList
+export default GameList

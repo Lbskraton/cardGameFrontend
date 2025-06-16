@@ -9,7 +9,7 @@ export interface Game {
   idUserCreator?: number;
 
   // Relaciones
-  idGameType?: GameType;
+  idGameType?: number;
   userCreator?: User;
   rounds?: Round[];
   gameParticipants?: GameParticipant[];

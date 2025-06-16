@@ -1,27 +1,27 @@
-import { useEffect, useState } from "react"
+import  { useEffect, useState } from 'react'
+
+import { RoundService } from '../services/round.service'
+import { useParams } from 'react-router-dom'
+import { Score } from '../models/Score'
+
+import { GameParticipant } from '../models/GameParticipant'
 
 
-import { GameTypeService } from "../services/gameType.service"
-import GameType from "../models/GameType"
-import { useNavigate } from "react-router-dom"
-import MessageCard from "../components/MessageCard"
+
+function ListScores() {
 
 
-
-function GameTypeList() {
 
   const [message,setMessage]=useState('')
   const [loading,setLoading]=useState(true)
-  const [gameTypes,setGameTypes]=useState<GameType[]>([])
+  const [scores,setScores]=useState<Score[]>([])
 
-  //Para navegar a los scores
-  const navigate = useNavigate();
+  const { gameid } = useParams();
 
 async function receiveList(){//Creo funcion por useEffect no puede async
   try {
-    const GamTypesList=await GameTypeService.getGameTypes()
-    
-    setGameTypes(GamTypesList)
+    const gamedata:GameParticipant=await RoundService.getScoresByUserAndGame(Number(gameid) ? Number(gameid) : 0 )
+    setScores(gamedata.scores ? gamedata.scores :[])
   } catch (error) {
     const msg= error instanceof Error ? error.message : "Error desconocido"
       setMessage(msg)
@@ -44,50 +44,38 @@ async function receiveList(){//Creo funcion por useEffect no puede async
     <>  
     <br/>
       <div className="relative overflow-x-auto">
-        {message ?<MessageCard size="text-xl">{message}</MessageCard> :<div></div>}
+        <span className="dark:text-white">{message}</span>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3 ">
-                Name
+                Game
               </th>
               <th scope="col" className="px-6 py-3">
-                Min Rounds
+                Round
               </th>
               <th scope="col" className="px-6 py-3">
-                Max Rounds
+                Value
               </th>
               <th scope="col" className="px-6 py-3">
-                Min Users
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Max Users
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Scores
+                Winner
               </th>
               
             </tr>
           </thead>
           <tbody>
-            {gameTypes.map(gameType=><tr key={gameType.name}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            {scores.map(score=><tr key={score.idGameParticipant+'_'+score.idRound}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {gameType.time}
+                {gameid}
               </th>
               <td className="px-6 py-4">
-                {gameType.minRounds}
+                {score.round?.gameid}
               </td>
               <td className="px-6 py-4">
-                {gameType.maxRounds}
+                {score.value}
               </td>
               <td className="px-6 py-4">
-                {gameType.minUsers}
-              </td>
-              <td className="px-6 py-4">
-                {gameType.maxUsers}
-              </td>
-              <td className="px-6 py-4">
-                <button onClick={() => navigate(`/scores/${gameType.id}`)}>Scores</button>
+                {score.winner}
               </td>
               
             </tr>)}
@@ -101,4 +89,4 @@ async function receiveList(){//Creo funcion por useEffect no puede async
   )
 }
 
-export default GameTypeList
+export default ListScores

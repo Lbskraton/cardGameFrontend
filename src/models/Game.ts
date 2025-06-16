@@ -1,5 +1,5 @@
 import { GameParticipant } from "./GameParticipant";
-import GameType from "./GameType";
+
 import Round from "./Round";
 import User from "./User";
 

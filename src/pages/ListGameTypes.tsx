@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
-import User from "../models/User"
-import { UserService } from "../services/userService"
+
 import { GameTypeService } from "../services/gameType.service"
 import GameType from "../models/GameType"
 
